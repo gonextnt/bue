@@ -13,7 +13,50 @@
 <body>
 <div id="app">
     <h1 class="app-title">Заметки</h1>
-    <button @click="addNoteCard" class="add-btn">Добавить карточку</button>
+
+    <div class="add-card-form">
+        <h2>Добавить новую карточку</h2>
+
+        <div class="form-group">
+            <label for="card-title">Название заметки:</label>
+            <input
+                    type="text"
+                    id="card-title"
+                    v-model="newCardTitle"
+                    placeholder="Введите название"
+                    class="input-field"
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Пункты списка:</label>
+            <div v-for="(item, index) in newCardItems" :key="index" class="item-row">
+                <input
+                        type="text"
+                        v-model="newCardItems[index]"
+                        :placeholder="'Пункт ' + (index + 1)"
+                        class="input-field item-input"
+                >
+                <button
+                        type="button"
+                        @click="removeItem(index)"
+                        class="remove-btn"
+                >
+                    &times;
+                </button>
+            </div>
+
+            <button
+                    type="button"
+                    @click="addItem"
+                    class="add-item-btn"
+            >
+                + Добавить пункт
+            </button>
+        </div>
+
+        <button @click="createCard" class="create-card-btn">Создать карточку</button>
+    </div>
 
     <div class="columns">
         <div class="column">
@@ -24,15 +67,44 @@
                     class="card"
             >
                 <h3>{{ card.title }}</h3>
+                <ul class="card-items">
+                    <li v-for="(item, index) in card.items" :key="index">
+                        {{ item.text }}
+                    </li>
+                </ul>
             </div>
         </div>
 
         <div class="column">
             <h2>Столбец 2</h2>
+            <div
+                    v-for="card in column2Cards"
+                    :key="card.id"
+                    class="card"
+            >
+                <h3>{{ card.title }}</h3>
+                <ul class="card-items">
+                    <li v-for="(item, index) in card.items" :key="index">
+                        {{ item.text }}
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <div class="column">
             <h2>Столбец 3</h2>
+            <div
+                    v-for="card in column3Cards"
+                    :key="card.id"
+                    class="card"
+            >
+                <h3>{{ card.title }}</h3>
+                <ul class="card-items">
+                    <li v-for="(item, index) in card.items" :key="index">
+                        {{ item.text }}
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
