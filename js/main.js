@@ -77,6 +77,10 @@ let app = new Vue({
                 const percentage = (completedItems / totalItems) * 100;
 
                 if (card.column === 1 && percentage >= 50) {
+                    if (this.isColumn1Blocked) {
+                        item.completed = false;
+                        return;
+                    }
                     card.column = 2;
                 }
                 if (card.column === 2 && percentage === 100) {
@@ -97,6 +101,9 @@ let app = new Vue({
         },
         column3Cards() {
             return this.cards.filter(card => card.column === 3);
+        },
+        isColumn1Blocked() {
+            return this.column2Cards.length >= 5;
         }
     },
     mounted() {

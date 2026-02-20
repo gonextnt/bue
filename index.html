@@ -52,7 +52,7 @@
                     class="add-item-btn"
                     :disabled="newCardItems.length >= 5"
             >
-                + Добавить пункт
+                Добавить пункт
             </button>
 
             <div v-if="formErrors.length" class="error-messages">
@@ -74,6 +74,9 @@
     <div class="columns">
         <div class="column">
             <h2>Столбец 1</h2>
+            <p v-if="isColumn1Blocked" class="blocked-message">
+                Столбец заблокирован. Для разблокировки заверщите карточку во втором столбце
+            </p>
             <div
                     v-for="card in column1Cards"
                     :key="card.id"
