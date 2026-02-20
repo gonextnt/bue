@@ -4,7 +4,8 @@ let app = new Vue({
         {
             cards: [],
             newCardTitle: '',
-            newCardItems: ['', '', '']
+            newCardItems: ['', '', ''],
+            formErrors: []
         },
     methods: {
         addItem() {
@@ -19,7 +20,19 @@ let app = new Vue({
         },
 
         createCard() {
+            this.formErrors = [];
+
             const validItems = this.newCardItems.filter(item => item.trim() !== '');
+
+            if (validItems.length < 3) {
+                this.formErrors.push('Должно быть минимум три пункта');
+                return;
+            }
+
+            if (validItems.length > 5) {
+                this.formErrors.push('Не может быть более пяти пунктов');
+                return;
+            }
 
             this.cards.push({
                 id: Date.now(),
@@ -36,6 +49,7 @@ let app = new Vue({
         resetForm() {
             this.newCardTitle = '';
             this.newCardItems = ['', '', ''];
+            this.formErrors = [];
         },
 
         saveCards() {

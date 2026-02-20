@@ -53,6 +53,13 @@
             >
                 + Добавить пункт
             </button>
+
+            <div v-if="formErrors.length" class="error-messages">
+                <p>Ошибка:</p>
+                <p v-for="error in formErrors">{{ error }}</p>
+            </div>
+
+
         </div>
 
         <button @click="createCard" class="create-card-btn">Создать карточку</button>
