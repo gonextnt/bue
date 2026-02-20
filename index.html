@@ -50,6 +50,7 @@
                     type="button"
                     @click="addItem"
                     class="add-item-btn"
+                    :disabled="newCardItems.length >= 5"
             >
                 + Добавить пункт
             </button>
@@ -75,7 +76,13 @@
             >
                 <h3>{{ card.title }}</h3>
                 <ul class="card-items">
-                    <li v-for="(item, index) in card.items" :key="index">
+                    <li
+                            v-for="(item, index) in card.items"
+                            :key="index"
+                            :class="{ 'completed': item.completed }"
+                            @click="toggleItem(card, item)"
+                            :style="{ cursor: item.completed ? 'default' : 'pointer' }"
+                    >
                         {{ item.text }}
                     </li>
                 </ul>
@@ -91,7 +98,13 @@
             >
                 <h3>{{ card.title }}</h3>
                 <ul class="card-items">
-                    <li v-for="(item, index) in card.items" :key="index">
+                    <li
+                            v-for="(item, index) in card.items"
+                            :key="index"
+                            :class="{ 'completed': item.completed }"
+                            @click="toggleItem(card, item)"
+                            :style="{ cursor: item.completed ? 'default' : 'pointer' }"
+                    >
                         {{ item.text }}
                     </li>
                 </ul>
@@ -107,10 +120,19 @@
             >
                 <h3>{{ card.title }}</h3>
                 <ul class="card-items">
-                    <li v-for="(item, index) in card.items" :key="index">
+                    <li
+                            v-for="(item, index) in card.items"
+                            :key="index"
+                            :class="{ 'completed': item.completed }"
+                            @click="toggleItem(card, item)"
+                            :style="{ cursor: item.completed ? 'default' : 'pointer' }"
+                    >
                         {{ item.text }}
                     </li>
                 </ul>
+                <p v-if="card.completedAt" class="completed-date">
+                    Завершено: {{card.completedAt}}
+                </p>
             </div>
         </div>
     </div>
