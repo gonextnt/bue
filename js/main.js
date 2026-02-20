@@ -34,6 +34,11 @@ let app = new Vue({
                 return;
             }
 
+            if (this.column1Cards.length >= 3 ) {
+                this.formErrors.push('В первом столбце не может быть более трёх карточек');
+                return;
+            }
+
             this.cards.push({
                 id: Date.now(),
                 title: this.newCardTitle.trim() || 'Новая заметка',

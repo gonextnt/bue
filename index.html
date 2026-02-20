@@ -63,7 +63,12 @@
 
         </div>
 
-        <button @click="createCard" class="create-card-btn">Создать карточку</button>
+        <button
+                @click="createCard"
+                class="create-card-btn"
+                :disabled="column1Cards.length >= 3"
+        >
+            Создать карточку</button>
     </div>
 
     <div class="columns">
