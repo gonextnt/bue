@@ -7,17 +7,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script defer src="js/vue.js"></script>
     <script defer src="js/main.js"></script>
-    <title>Заметки</title>
+    <title>Notes</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 <div id="app">
     <h1 class="app-title">Заметки</h1>
-    <button class="add-btn">Добавить карточку</button>
+    <button @click="addNoteCard" class="add-btn">Добавить карточку</button>
 
     <div class="columns">
         <div class="column">
             <h2>Столбец 1</h2>
+            <div
+                    v-for="card in column1Cards"
+                    :key="card.id"
+                    class="card"
+            >
+                <h3>{{ card.title }}</h3>
+            </div>
         </div>
 
         <div class="column">
